@@ -1,39 +1,31 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Website Online Saya</title>
-    <style>
-        body { font-family: sans-serif; text-align: center; margin-top: 50px; }
-        #result { margin-top: 20px; font-weight: bold; color: #333; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Disdukcapil Kab. Barru</title>
+  <style>
+    /* Mengatur agar halaman tampil penuh memenuhi layar tanpa scroll */
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: #f1f5f9;
+    }
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+  </style>
 </head>
 <body>
 
-    <h1>Halo, Selamat Datang di Website Saya!</h1>
-    <p>Website ini di-hosting gratis di GitHub Pages, terhubung ke Google Apps Script.</p>
-    
-    <button onclick="panggilData()">Ambil Data dari Apps Script</button>
-    <div id="result">Menunggu data...</div>
-
-    <script>
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbxvkNTAogi-ahdMGxYce8E6KKxprH3iEFJ2j6Qc6eplq7RK3gIgCnDnOxIObHfeU4O-oQ/exec';
-
-        function panggilData() {
-            document.getElementById('result').innerText = 'Memuat data...';
-            
-            fetch(scriptURL)
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('result').innerText = 'Respon dari Apps Script: ' + data;
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    document.getElementById('result').innerText = 'Gagal mengambil data.';
-                });
-        }
-    </script>
+  <!-- Ganti URL di bawah ini dengan URL Web App Apps Script Anda yang berakhiran /exec -->
+  <iframe src="https://script.google.com/macros/s/AKfycbxvkNTAogi-ahdMGxYce8E6KKxprH3iEFJ2j6Qc6eplq7RK3gIgCnDnOxIObHfeU4O-oQ/exec" title="Disdukcapil Barru"></iframe>
 
 </body>
 </html>
