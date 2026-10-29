@@ -4,14 +4,97 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Data BNBA Disdukcapil Kab. Barru Tahun 2026</title>
-  <!-- Meta tag untuk redirect otomatis seketika -->
-  <meta http-equiv="refresh" content="0; url=https://script.google.com/macros/s/AKfycbxvkNTAogi-ahdMGxYce8E6KKxprH3iEFJ2j6Qc6eplq7RK3gIgCnDnOxIObHfeU4O-oQ/exec">
-  <script>
-    // Backup redirect menggunakan JavaScript
-    window.location.replace("https://script.google.com/macros/s/AKfycbxvkNTAogi-ahdMGxYce8E6KKxprH3iEFJ2j6Qc6eplq7RK3gIgCnDnOxIObHfeU4O-oQ/exec");
-  </script>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f8fafc;
+      margin: 0;
+      padding: 20px;
+      color: #334155;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    h2 {
+      margin-top: 0;
+      color: #1e293b;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+    th, td {
+      border: 1px solid #e2e8f0;
+      padding: 10px 12px;
+      text-align: left;
+      font-size: 14px;
+    }
+    th {
+      background-color: #2563eb;
+      color: white;
+    }
+    tr:nth-child(even) {
+      background-color: #f8fafc;
+    }
+    .loading {
+      text-align: center;
+      padding: 40px;
+      font-weight: bold;
+      color: #64748b;
+    }
+  </style>
 </head>
-<body style="background-color: #f8fafc; font-family: sans-serif; text-align: center; padding-top: 50px;">
-  <p>Sedang memuat data BNBA Disdukcapil Kab. Barru...</p>
+<body>
+
+  <div class="container">
+    <h2>Data BNBA Disdukcapil Kab. Barru</h2>
+    <div id="app">
+      <div class="loading">Sedang memuat data dari server...</div>
+    </div>
+  </div>
+
+  <script>
+    // Ganti URL di bawah ini dengan URL Web App Apps Script Anda yang berakhiran /exec
+    const apiURL = "https://script.google.com/macros/s/AKfycbxvkNTAogi-ahdMGxYce8E6KKxprH3iEFJ2j6Qc6eplq7RK3gIgCnDnOxIObHfeU4O-oQ/exec";
+
+    fetch(apiURL)
+      .then(response => response.json())
+      .then(data => {
+        if (data.length === 0) {
+          document.getElementById('app').innerHTML = "<p>Tidak ada data ditemukan.</p>";
+          return;
+        }
+
+        let keys = Object.keys(data[0]);
+        let html = "<table><thead><tr>";
+        
+        keys.forEach(key => {
+          html += `<th>${key}</th>`;
+        });
+        html += "</tr></thead><tbody>";
+
+        data.forEach(row => {
+          html += "<tr>";
+          keys.forEach(key => {
+            html += `<td>${row[key] !== undefined ? row[key] : ''}</td>`;
+          });
+          html += "</tr>";
+        });
+
+        html += "</tbody></table>";
+        document.getElementById('app').innerHTML = html;
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        document.getElementById('app').innerHTML = "<p style='color: red;'>Gagal memuat data. Pastikan deployment Apps Script sudah diatur ke 'Siapa saja'.</p>";
+      });
+  </script>
+
 </body>
 </html>
